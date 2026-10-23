@@ -1,0 +1,199 @@
+/* ==========================================================================
+   زیبانو (ZibaNo) - استایل‌های اختصاصی و سفارشی
+   پروژه دانشگاهی تجارت الکترونیک: سامانه رزرو آرایشگاه و شبیه‌ساز پرو مو
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+
+:root {
+  --primary-purple: #4A154B;
+  --accent-pink: #D47A95;
+  --accent-gold: #C5A059;
+  --bg-sand: #FAF8F5;
+  --card-surface: #FFFFFF;
+}
+
+* {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-sand);
+  color: #292524;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F3EAE3;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8B4C8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B9769B;
+}
+
+/* Glassmorphism & Surface Utilities */
+.glass-header {
+  background: rgba(250, 248, 245, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card-luxury {
+  background: #FFFFFF;
+  border: 1px solid rgba(229, 218, 210, 0.7);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-luxury:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -10px rgba(74, 21, 75, 0.08);
+  border-color: rgba(212, 122, 149, 0.4);
+}
+
+/* Smooth Image Loading */
+.img-cover-zoom {
+  overflow: hidden;
+}
+.img-cover-zoom img {
+  transition: transform 0.45s ease;
+}
+.card-luxury:hover .img-cover-zoom img {
+  transform: scale(1.04);
+}
+
+/* Virtual Try-On Canvas & Overlay Styles */
+.tryon-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #2B2627;
+  user-select: none;
+}
+
+.tryon-model-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hair-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out, filter 0.2s ease;
+  transform-origin: center top;
+}
+
+/* Before / After Slider */
+.ba-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.ba-slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #FFFFFF;
+  cursor: ew-resize;
+  z-index: 20;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.ba-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  background: #FFFFFF;
+  border: 2px solid #7E22CE;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badge and Tab active states */
+.tab-active {
+  background: linear-gradient(135deg, #4A154B 0%, #7E22CE 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(126, 34, 206, 0.25);
+}
+
+/* Toast container */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 280px;
+  max-width: 380px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideDown 0.3s ease;
+}
+
+.toast-success {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.toast-error {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+.toast-info {
+  background: #4A154B;
+  color: #FFFFFF;
+}

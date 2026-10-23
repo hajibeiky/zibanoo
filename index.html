@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>زیبانو | سامانه هوشمند رزرو آرایشگاه و شبیه‌ساز پرو مو</title>
+  <meta name="description" content="پلتفرم جامع تجارت الکترونیک برای جستجو، مقایسه قیمت و رزرو آنلاین نوبت سالن‌های زیبایی و آرایشگاه‌ها همراه با پرو مجازی مدل مو و پرونده تحلیلی کسب‌وکار">
+  
+  <!-- فونت وزیرمتن فارسی از گوگل فونت -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              purple: '#4A154B',
+              pink: '#D47A95',
+              gold: '#C5A059',
+              light: '#FAF8F5'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- استایل‌های سفارشی -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-[#FAF8F5] text-stone-800 antialiased font-sans">
+
+  <!-- ========================================================================
+       هدر سایت (Top Bar Contract: 3 Zones)
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 glass-header border-b border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-8">
+      
+      <!-- Zone 1: Single text element wordmark -->
+      <a href="#" class="flex items-center gap-2.5 whitespace-nowrap shrink-0 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 via-pink-600 to-purple-800 flex items-center justify-center text-white shadow-md shadow-purple-900/10 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879a3 3 0 11-4.242-4.242L12 12m0 0l-2.879-2.879a3 3 0 114.242-4.242L12 12z" />
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-bold tracking-tight bg-gradient-to-l from-purple-950 via-stone-900 to-rose-700 bg-clip-text text-transparent">
+            زیبـانـو
+          </span>
+          <span class="text-[9px] text-stone-500 font-semibold tracking-widest uppercase">
+            ZibaNo Beauty Tech
+          </span>
+        </div>
+      </a>
+
+      <!-- Zone 2: 4-5 concise single-line text navigation links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-stone-600">
+        <a href="#hero" class="hover:text-stone-900 transition whitespace-nowrap shrink-0 hover:underline underline-offset-8">
+          صفحه اصلی
+        </a>
+        <a href="#salons-section" class="hover:text-stone-900 transition whitespace-nowrap shrink-0 hover:underline underline-offset-8">
+          رزرو آرایشگاه‌ها
+        </a>
+        <button onclick="openSimulatorModal()" class="flex items-center gap-1.5 text-purple-800 hover:text-purple-950 font-bold transition whitespace-nowrap shrink-0 cursor-pointer">
+          <svg class="w-4 h-4 text-purple-600 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+          <span>شبیه‌ساز پرو مو</span>
+        </button>
+        <a href="#business-portfolio" class="hover:text-stone-900 transition whitespace-nowrap shrink-0 hover:underline underline-offset-8">
+          پرونده تحلیلی ایده
+        </a>
+      </nav>
+
+      <!-- Zone 3: 1 primary action -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button 
+          onclick="openAppointmentsModal()"
+          class="relative flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-l from-rose-600 to-purple-800 rounded-xl hover:from-rose-700 hover:to-purple-900 shadow-sm shadow-purple-900/20 transition cursor-pointer whitespace-nowrap shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>نوبت‌های من</span>
+          <span id="nav-appointments-badge" class="hidden w-5 h-5 rounded-full bg-white text-purple-900 text-xs font-bold items-center justify-center shadow-sm">
+            0
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       بخش قهرمان (Hero Section)
+       ======================================================================== -->
+  <section id="hero" class="relative pt-8 pb-16 md:pt-14 md:pb-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- ستون متن و معرفی -->
+        <div class="lg:col-span-7 space-y-6 text-right">
+          
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100/80 border border-purple-200 text-purple-900 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+            <span>پروژه درس تجارت الکترونیک · فاز اول: تحلیل امکان‌سنجی</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 leading-tight tracking-tight text-balance">
+            انتخاب هوشمندانه، رزرو آنی و <span class="bg-gradient-to-l from-rose-600 to-purple-800 bg-clip-text text-transparent">پرو مجازی استایل مو</span> قبل از قیچی
+          </h1>
+
+          <p class="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl">
+            زیبانو پلتفرم تخصصی کشف برترین سالن‌های زیبایی و آرایشگاه‌های مردانه کشور است. قیمت‌ها را مقایسه کنید، نوبت خود را آنلاین و بدون معطلی ثبت نمایید و با شبیه‌ساز چهره، استایل جدید مویتان را پیش از مراجعه ببینید.
+          </p>
+
+          <!-- دکمه‌های اقدام سریع -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a 
+              href="#salons-section" 
+              class="px-6 py-3.5 bg-gradient-to-l from-rose-600 to-purple-800 hover:from-rose-700 hover:to-purple-900 text-white text-sm font-bold rounded-xl shadow-md shadow-purple-900/15 transition cursor-pointer"
+            >
+              مشاهده و رزرو آرایشگاه‌ها
+            </a>
+            <button 
+              onclick="openSimulatorModal()" 
+              class="px-5 py-3.5 bg-white border border-purple-200 hover:border-purple-300 text-purple-900 text-sm font-bold rounded-xl shadow-xs transition flex items-center gap-2 cursor-pointer"
+            >
+              <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+              </svg>
+              <span>امتحان شبیه‌ساز مو</span>
+            </button>
+          </div>
+
+          <!-- نوار جستجوی پیشرفته سریع -->
+          <div class="mt-6 p-3 sm:p-4 bg-white rounded-2xl shadow-lg shadow-stone-200/60 border border-stone-200/80">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+              
+              <div class="sm:col-span-7 relative">
+                <input 
+                  type="text" 
+                  id="search-input"
+                  placeholder="جستجوی نام آرایشگاه یا نوع خدمت (کوتاهی، بالیاژ، فید...)"
+                  class="w-full pl-4 pr-10 py-3 bg-stone-50 border border-stone-200 rounded-xl text-xs sm:text-sm text-stone-800 focus:outline-none focus:border-purple-600 focus:bg-white transition"
+                />
+                <svg class="w-5 h-5 text-stone-400 absolute right-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+
+              <div class="sm:col-span-3">
+                <select 
+                  id="filter-city"
+                  class="w-full py-3 px-3 bg-stone-50 border border-stone-200 rounded-xl text-xs sm:text-sm text-stone-700 focus:outline-none focus:border-purple-600 cursor-pointer"
+                >
+                  <option value="all">همه شهرها</option>
+                  <option value="تهران">تهران</option>
+                  <option value="اصفهان">اصفهان</option>
+                  <option value="شیراز">شیراز</option>
+                  <option value="مشهد">مشهد</option>
+                </select>
+              </div>
+
+              <div class="sm:col-span-2">
+                <a 
+                  href="#salons-section" 
+                  class="w-full py-3 bg-stone-900 hover:bg-stone-800 text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center transition"
+                >
+                  پیدا کن
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- اعداد کلیدی و اعتماد -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-stone-200/60 text-right">
+            <div>
+              <div class="text-xl sm:text-2xl font-bold text-stone-900 font-mono">۱۲,۴۰۰+</div>
+              <div class="text-[11px] text-stone-500">نوبت موفق آنلاین</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-bold text-purple-900 font-mono">۴۵۰+</div>
+              <div class="text-[11px] text-stone-500">سالن معتبر تاییدشده</div>
+            </div>
+            <div>
+              <div class="text-xl sm:text-2xl font-bold text-rose-700 font-mono">۹۸٪</div>
+              <div class="text-[11px] text-stone-500">رضایت مشتریان</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ستون تصویر و پیش‌نمایش بنر -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-purple-950/10 border border-stone-200 aspect-[4/3] lg:aspect-[4/3] bg-stone-100">
+            <img 
+              src="/src/assets/images/hero_beauty_salon_1792743870166.jpg" 
+              alt="سالن زیبایی لوکس زیبانو" 
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent"></div>
+            
+            <!-- کارت شناور ویژگی -->
+            <div class="absolute bottom-4 right-4 left-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-white/60 shadow-lg text-right">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-xs font-bold text-stone-900">پرو آنلاین مدل مو با چهره شما</div>
+                  <div class="text-[11px] text-stone-500 mt-0.5">بدون نیاز به نصب اپلیکیشن · تست رنگ و کوتاهی</div>
+                </div>
+                <button 
+                  onclick="openSimulatorModal()"
+                  class="px-3 py-1.5 bg-purple-700 text-white rounded-lg text-xs font-bold hover:bg-purple-800 transition"
+                >
+                  شروع پرو
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       بخش بنر شبیه‌ساز پرو مو
+       ======================================================================== -->
+  <section class="py-6 bg-gradient-to-l from-purple-900 via-indigo-950 to-stone-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4 text-right">
+        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-pink-400 shrink-0 border border-white/10">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-base font-bold">می‌خواهید مدل مو یا رنگ جدید را روی صورت خود تست کنید؟</h3>
+          <p class="text-xs text-stone-300 mt-0.5">در بخش شبیه‌ساز زیبایی عکس چهره‌تان را آپلود کرده و انواع کوتاهی، باب، لیر، فید و رنگ‌های متنوع را پرو نمایید.</p>
+        </div>
+      </div>
+      <button 
+        onclick="openSimulatorModal()"
+        class="px-6 py-2.5 bg-gradient-to-l from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white rounded-xl text-xs font-bold shadow-md shadow-pink-600/30 whitespace-nowrap cursor-pointer transition"
+      >
+        ورود به استودیوی پرو مو
+      </button>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       بخش کاتالوگ و کارت‌های آرایشگاه‌ها (Salons Catalog)
+       ======================================================================== -->
+  <section id="salons-section" class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- هدر بخش و فیلترها -->
+    <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-8">
+      <div class="text-right">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
+          برترین سالن‌های زیبایی و آرایشگاه‌ها
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-500 mt-1">
+          مشاهده تعرفه‌ها، مقایسه نظرات کاربران و رزرو فوری نوبت با تضمین شفافیت قیمت
+        </p>
+      </div>
+
+      <!-- مرتب‌سازی -->
+      <div class="flex items-center gap-3 self-end">
+        <span id="salons-count-label" class="text-xs text-stone-500 font-medium"></span>
+        <select 
+          id="sort-select"
+          class="bg-white border border-stone-200 text-stone-700 text-xs rounded-xl py-2 px-3 focus:outline-none focus:border-purple-600 cursor-pointer"
+        >
+          <option value="recommended">پیشنهاد زیبانو</option>
+          <option value="rating">بالاترین امتیاز کاربران</option>
+          <option value="price_asc">مناسب‌ترین قیمت (صعودی)</option>
+          <option value="price_desc">خدمات VIP و لوکس (نزولی)</option>
+          <option value="reviews">بیشترین تعداد نظرات</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- تب‌های فیلتر دسته‌بندی خدمات -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+      <button data-cat="all" class="cat-btn tab-active px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap cursor-pointer transition">
+        همه خدمات
+      </button>
+      <button data-cat="haircut" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        کوتاهی و استایل مو
+      </button>
+      <button data-cat="color" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        رنگ، مش و بالیاژ
+      </button>
+      <button data-cat="skin" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        پوست، پاکسازی و فیشیال
+      </button>
+      <button data-cat="nail" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        کاشت و طراحی ناخن
+      </button>
+      <button data-cat="makeup" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        میکاپ و خدمات مژه
+      </button>
+      <button data-cat="barber" class="cat-btn bg-stone-100 hover:bg-stone-200 text-stone-700 px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap cursor-pointer transition">
+        پیرایش و باربرشاپ آقایان
+      </button>
+    </div>
+
+    <!-- کانتینر گرید آرایشگاه‌ها -->
+    <div id="salons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- کارتها توسط JavaScript رندر می‌شوند -->
+    </div>
+
+  </section>
+
+  <!-- ========================================================================
+       نوار شناور مقایسه سالن‌ها (Comparison Floating Bar)
+       ======================================================================== -->
+  <div 
+    id="comparison-floating-bar" 
+    class="fixed bottom-6 right-6 left-6 max-w-lg mx-auto bg-stone-900 text-white rounded-2xl p-4 shadow-2xl border border-stone-700 z-30 hidden items-center justify-between animate-slide-down"
+  >
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs" id="compare-count">
+        0
+      </div>
+      <div class="text-xs">
+        <span class="font-bold">آرایشگاه انتخاب شده برای مقایسه</span>
+        <div class="text-[10px] text-stone-400">امکان مقایسه قیمت، امتیاز و امکانات</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button 
+        onclick="openComparisonModal()"
+        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl transition cursor-pointer"
+      >
+        مشاهده جدول مقایسه
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       بخش پرونده تحلیلی پروژه دانشگاهی (Academic Business Portfolio)
+       پاسخ به ۸ سوال ارزیابی ایده بالغ
+       ======================================================================== -->
+  <section id="business-portfolio" class="py-16 bg-white border-t border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- هدر پرونده تحلیلی -->
+      <div class="text-right max-w-3xl mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-purple-800 text-xs font-bold mb-3 border border-purple-200">
+          🎓 ویژه فاز اول درس تجارت الکترونیک (E-Commerce)
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900">
+          پرونده تحلیلی کسب‌وکار و ارزیابی ایده بالغ «زیبانو»
+        </h2>
+        <p class="text-xs sm:text-sm text-stone-600 leading-relaxed mt-2">
+          مستندات علمی، تبیین مسئله، تحلیل بازار و پاسخ جامع به ۸ پرسش بنیادین ارزیابی ایده کسب‌وکار الکترونیکی بالغ جهت ارائه دانشگاهی.
+        </p>
+      </div>
+
+      <!-- خلاصه مسئله و راهکار در دو ستون -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 text-right">
+        
+        <div class="p-6 rounded-2xl bg-rose-50/60 border border-rose-100">
+          <h3 class="text-sm font-bold text-rose-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+            <span>تبیین مسئله و نقاط درد (Pain Points)</span>
+          </h3>
+          <ul class="text-xs text-stone-600 space-y-2.5 leading-relaxed">
+            <li>• <strong>عدم شفافیت در قیمت‌گذاری:</strong> هزینه‌های متغیر و فاکتورهای غیرمنتظره پس از اتمام کار در روش سنتی.</li>
+            <li>• <strong>معطلی و اتلاف وقت:</strong> تماس‌های تلفنی مکرر برای استعلام نوبت و انتظار طولانی روی صندلی سالن.</li>
+            <li>• <strong>ریسک نارضایتی از استایل:</strong> مشتری نمی‌داند مدل مو یا رنگ مدنظر به چهره‌اش می‌آید یا خیر.</li>
+            <li>• <strong>نرخ بالای کنسلی سالن‌ها:</strong> میانگین ۳۰٪ لغو نوبت‌های دقیقه نودی بدون جبران مالی برای آرایشگر.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-purple-50/60 border border-purple-100">
+          <h3 class="text-sm font-bold text-purple-900 mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-purple-600"></span>
+            <span>ارزش خلق‌شده توسط زیبانو (ZibaNo Solution)</span>
+          </h3>
+          <ul class="text-xs text-stone-600 space-y-2.5 leading-relaxed">
+            <li>• <strong>شبیه‌ساز پرو مجازی مو:</strong> امکان تست چهره‌ای مدل مو پیش از پرداخت و مراجعه به سالن.</li>
+            <li>• <strong>تقویم نوبت‌دهی آنلاین و قطعی:</strong> انتخاب تاریخ شمسی و سانس آزاد با کد رهگیری اختصاصی.</li>
+            <li>• <strong>موتور مقایسه شفاف:</strong> ارزیابی سالن‌ها بر پایه تخصص، مواد مصرفی، امتیاز واقعی و سطح قیمت.</li>
+            <li>• <strong>کاهش غیبت مشتریان (No-Show):</strong> سیستم رزرو تضمینی با کاهش ۶۵ درصدی کنسلی‌های بی‌دلیل.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- لیست آکاردئونی ۸ سوال ارزیابی ایده بالغ -->
+      <div class="space-y-4 text-right">
+        <h3 class="text-lg font-bold text-stone-900 mb-4">
+          پاسخ تحلیلی به ۸ پرسش ارزیابی ایده بالغ (Mature Idea Evaluation)
+        </h3>
+        
+        <div id="academic-questions-container" class="space-y-3">
+          <!-- با جاوااسکریپت پر می‌شود -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       فوتر سایت
+       ======================================================================== -->
+  <footer class="bg-stone-900 text-stone-300 py-12 border-t border-stone-800 text-right">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      
+      <div class="space-y-3 md:col-span-2">
+        <div class="flex items-center gap-2 text-white font-bold text-lg">
+          <span>زیبانـو (ZibaNo)</span>
+        </div>
+        <p class="text-xs text-stone-400 leading-relaxed max-w-md">
+          پروژه درس تجارت الکترونیک - سامانه یکپارچه کشف، مقایسه و رزرو نوبت سالن‌های زیبایی به همراه استودیوی مجازی پرو مو. طراحی شده بر اساس استانداردهای وب مدرن، کاملاً ریسپانسیو و راست‌چین.
+        </p>
+        <div class="text-[11px] text-stone-500 font-mono">
+          توسعه یافته با HTML5 · Tailwind CSS · Vanilla JavaScript · LocalStorage
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3">دسترسی سریع</h4>
+        <ul class="text-xs space-y-2 text-stone-400">
+          <li><a href="#hero" class="hover:text-white transition">صفحه اصلی</a></li>
+          <li><a href="#salons-section" class="hover:text-white transition">فهرست آرایشگاه‌ها</a></li>
+          <li><a href="javascript:void(0)" onclick="openSimulatorModal()" class="hover:text-white transition">شبیه‌ساز پرو مو</a></li>
+          <li><a href="#business-portfolio" class="hover:text-white transition">پرونده تحلیلی ایده بالغ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-white mb-3">کدهای تخفیف فعال</h4>
+        <div class="bg-stone-800/80 p-3 rounded-xl border border-stone-700 text-xs">
+          <div class="text-stone-300 font-semibold mb-1">کد دانشجویی ۲۰٪ تخفیف:</div>
+          <div class="font-mono text-purple-400 text-sm font-bold tracking-wider">ZIBANO20</div>
+          <div class="text-[10px] text-stone-400 mt-1">قابل استفاده در مرحله رزرو نوبت</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-stone-800 text-center text-xs text-stone-500">
+      تمامی حقوق این پروژه متعلق به «زیبانو» ویژه ارائه دانشگاهی درس تجارت الکترونیک می‌باشد. © ۱۴۰۳
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       مدال شبیه‌ساز پرو مو (Beauty Simulator Modal)
+       ======================================================================== -->
+  <div id="simulator-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-right animate-fade-in relative max-h-[92vh] flex flex-col justify-between overflow-y-auto">
+      
+      <!-- دکمه بستن -->
+      <button 
+        onclick="closeSimulatorModal()" 
+        class="absolute top-5 left-5 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 transition cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <div>
+        <!-- عنوان مدال -->
+        <div class="mb-4">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-purple-100 text-purple-900 text-[11px] font-bold mb-1">
+            ✨ استودیوی مجازی زیبانو
+          </div>
+          <h3 class="text-xl font-bold text-stone-900">شبیه‌ساز زیبایی و پرو مجازی مدل مو</h3>
+          <p class="text-xs text-stone-500 mt-0.5">مدل‌های مو و تناژهای رنگی را روی پرتره تست کنید و زاویه را تنظیم فرمایید.</p>
+        </div>
+
+        <!-- پیام سلب مسئولیت فاز ۱ -->
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-900 text-xs mb-5 flex items-start gap-2">
+          <span class="text-sm">⚠️</span>
+          <div>
+            <strong>یادداشت فنی فاز اول:</strong>
+            در این نسخه شبیه‌سازی واقعی با مدل هوش مصنوعی مولد متصل نشده است؛ این بخش یک نمونه اولیه تعاملی بصری (Interactive Prototype) برای تست زاویه، رنگ و فرم مو می‌باشد.
+          </div>
+        </div>
+
+        <!-- بدنه استودیو: بوم سمت چپ، کنترل‌ها سمت راست -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          
+          <!-- استیج نمایش مدل و مو -->
+          <div class="md:col-span-6 bg-stone-900 rounded-2xl p-4 flex flex-col items-center justify-center relative">
+            
+            <div class="tryon-stage w-64 h-64 sm:w-72 sm:h-72 shadow-inner border border-stone-700">
+              <img 
+                id="tryon-model-image" 
+                src="/src/assets/images/tryon_model_portrait_1792743871656.jpg" 
+                alt="مدل پرو مو" 
+                class="tryon-model-img" 
+              />
+              <div id="hair-overlay-layer" class="hair-layer"></div>
+            </div>
+
+            <!-- دکمه مقایسه قبل و بعد -->
+            <div class="flex items-center gap-2 mt-4">
+              <button 
+                onmousedown="toggleBeforeAfter(true)" 
+                onmouseup="toggleBeforeAfter(false)"
+                ontouchstart="toggleBeforeAfter(true)" 
+                ontouchend="toggleBeforeAfter(false)"
+                class="px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-lg text-xs font-semibold cursor-pointer select-none transition"
+              >
+                نگه‌دارید برای دیدن حالت قبل (Original)
+              </button>
+              <button 
+                onclick="resetTryonModel()"
+                class="px-2.5 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-400 rounded-lg text-xs transition"
+                title="بازنشانی"
+              >
+                ⟲
+              </button>
+            </div>
+
+          </div>
+
+          <!-- ستون انتخاب مدل مو، رنگ و تنظیمات -->
+          <div class="md:col-span-6 space-y-4">
+            
+            <!-- آپلود عکس شخصی -->
+            <div class="p-3 bg-stone-50 rounded-xl border border-stone-200">
+              <label class="block text-xs font-bold text-stone-800 mb-1.5">عکس چهره خود را آپلود کنید:</label>
+              <input 
+                type="file" 
+                id="user-photo-upload" 
+                accept="image/*"
+                class="block w-full text-xs text-stone-500 file:mr-0 file:ml-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-700 file:text-white hover:file:bg-purple-800 cursor-pointer"
+              />
+            </div>
+
+            <!-- انتخاب مدل مو -->
+            <div>
+              <label class="block text-xs font-bold text-stone-800 mb-1.5">انتخاب مدل مو (Hair Style):</label>
+              <div id="hairstyles-list" class="grid grid-cols-2 gap-2 max-h-36 overflow-y-auto p-1">
+                <!-- توسط JS پر می‌شود -->
+              </div>
+            </div>
+
+            <!-- انتخاب رنگ مو -->
+            <div>
+              <label class="block text-xs font-bold text-stone-800 mb-1.5">انتخاب رنگ مو (Hair Color):</label>
+              <div id="colors-swatches" class="flex items-center gap-3 p-1">
+                <!-- توسط JS پر می‌شود -->
+              </div>
+            </div>
+
+            <!-- اسلایدرهای تنظیم دقیق اندازه و موقعیت -->
+            <div class="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-2 text-xs">
+              <div class="text-[11px] font-bold text-stone-700">تنظیم دقیق روی چهره:</div>
+              
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-stone-500">اندازه (Scale):</span>
+                <input type="range" id="slider-scale" min="80" max="130" value="100" class="w-32 accent-purple-700 cursor-pointer">
+              </div>
+
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-stone-500">جابجایی عمودی:</span>
+                <input type="range" id="slider-offset-y" min="-30" max="30" value="0" class="w-32 accent-purple-700 cursor-pointer">
+              </div>
+
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-stone-500">چرخش زاویه:</span>
+                <input type="range" id="slider-rotation" min="-15" max="15" value="0" class="w-32 accent-purple-700 cursor-pointer">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- دکمه بستن و ادامه -->
+      <div class="mt-6 pt-4 border-t border-stone-200 flex justify-end">
+        <button 
+          onclick="closeSimulatorModal()" 
+          class="px-6 py-2.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold transition cursor-pointer"
+        >
+          تایید و بستن شبیه‌ساز
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       مدال رزرو نوبت آنلاین (Online Booking Modal)
+       ======================================================================== -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-right animate-fade-in relative max-h-[92vh] overflow-y-auto">
+      
+      <button 
+        onclick="closeBookingModal()" 
+        class="absolute top-5 left-5 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 transition cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <!-- هدر مدال رزرو -->
+      <div class="mb-5 border-b border-stone-100 pb-4">
+        <span class="text-[11px] font-bold text-purple-700 uppercase">فرم ثبت نوبت آنلاین</span>
+        <h3 id="booking-salon-name" class="text-xl font-bold text-stone-900 mt-0.5"></h3>
+        <p id="booking-salon-address" class="text-xs text-stone-500 mt-1"></p>
+      </div>
+
+      <!-- فرم رزرو -->
+      <form id="booking-form" class="space-y-5">
+        
+        <!-- ۱. انتخاب خدمت -->
+        <div>
+          <label class="block text-xs font-bold text-stone-800 mb-2">۱. خدمت مدنظر خود را انتخاب فرمایید:</label>
+          <div id="booking-services-list" class="space-y-2 max-h-44 overflow-y-auto p-1">
+            <!-- توسط JS پر می‌شود -->
+          </div>
+        </div>
+
+        <!-- ۲. انتخاب متخصص -->
+        <div>
+          <label class="block text-xs font-bold text-stone-800 mb-2">۲. انتخاب آرایشگر یا متخصص مربوطه:</label>
+          <div id="booking-specialists-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <!-- توسط JS پر می‌شود -->
+          </div>
+        </div>
+
+        <!-- ۳. انتخاب تاریخ و ساعت -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-stone-800 mb-2">۳. تاریخ نوبت (شمسی):</label>
+            <div id="booking-date-slots" class="grid grid-cols-3 gap-1.5">
+              <!-- توسط JS پر می‌شود -->
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-stone-800 mb-2">۴. ساعت مراجعه:</label>
+            <div id="booking-time-slots" class="grid grid-cols-4 gap-1.5">
+              <!-- توسط JS پر می‌شود -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ۴. اطلاعات تماس با اعتبارسنجی -->
+        <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
+          <div class="text-xs font-bold text-stone-800">۵. مشخصات فردی رزروکننده:</div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-stone-600 mb-1">نام و نام‌خانوادگی *</label>
+              <input 
+                type="text" 
+                id="client-name" 
+                required 
+                placeholder="مثلاً: مریم احمدی"
+                class="w-full px-3 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none focus:border-purple-600"
+              />
+            </div>
+            <div>
+              <label class="block text-[11px] text-stone-600 mb-1">شماره موبایل معتبر (جهت پیامک نوبت) *</label>
+              <input 
+                type="tel" 
+                id="client-phone" 
+                required 
+                placeholder="۰۹۱۲۳۴۵۶۷۸۹"
+                class="w-full px-3 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none focus:border-purple-600 font-mono text-left"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-stone-600 mb-1">یادداشت و درخواست ویژه (اختیاری)</label>
+            <input 
+              type="text" 
+              id="client-notes" 
+              placeholder="مثلاً: پوست حساس، رنگ موی بدون آمونیاک و..."
+              class="w-full px-3 py-2 text-xs bg-white border border-stone-200 rounded-xl focus:outline-none focus:border-purple-600"
+            />
+          </div>
+        </div>
+
+        <!-- ۵. کد تخفیف -->
+        <div class="flex items-center gap-2">
+          <input 
+            type="text" 
+            id="coupon-input" 
+            placeholder="کد تخفیف (مثلاً: ZIBANO20)"
+            class="px-3 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl uppercase font-mono tracking-wider focus:outline-none focus:border-purple-600"
+          />
+          <button 
+            type="button" 
+            onclick="applyCouponCode()"
+            class="px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white rounded-xl text-xs font-bold transition cursor-pointer"
+          >
+            اعمال کد
+          </button>
+          <span id="coupon-message" class="text-xs"></span>
+        </div>
+
+        <!-- خلاصه صورتحساب -->
+        <div class="p-4 bg-purple-50/70 rounded-2xl border border-purple-100 flex items-center justify-between text-xs">
+          <div class="space-y-1">
+            <div class="text-stone-600">قیمت پایه: <span id="summary-base-price" class="font-bold text-stone-800"></span></div>
+            <div class="text-stone-600">تخفیف: <span id="summary-discount" class="font-bold text-rose-600">۰ تومان</span></div>
+          </div>
+          <div class="text-left">
+            <div class="text-[11px] text-stone-500">مبلغ نهایی قابل پرداخت:</div>
+            <div id="summary-final-price" class="text-base font-extrabold text-purple-900"></div>
+          </div>
+        </div>
+
+        <!-- دکمه ثبت نهایی -->
+        <div class="pt-2">
+          <button 
+            type="submit"
+            class="w-full py-3.5 bg-gradient-to-l from-rose-600 to-purple-800 hover:from-rose-700 hover:to-purple-900 text-white font-bold text-sm rounded-xl shadow-md shadow-purple-900/20 transition cursor-pointer"
+          >
+            ثبت نهایی نوبت و دریافت رسید دیجیتال
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       مدال رسید موفقیت رزرو (Booking Success Receipt Modal)
+       ======================================================================== -->
+  <div id="receipt-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-right animate-fade-in relative text-center">
+      
+      <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+        ✓
+      </div>
+
+      <h3 class="text-lg font-bold text-stone-900 mb-1">نوبت شما با موفقیت ثبت گردید</h3>
+      <p class="text-xs text-stone-500 mb-6">پیامک تایید نوبت برای شما ارسال خواهد شد. اطلاعات رسید در LocalStorage مرورگر ذخیره گردید.</p>
+
+      <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 text-xs text-right space-y-2.5 mb-6">
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">کد رهگیری:</span>
+          <span id="receipt-tracking" class="font-bold font-mono text-purple-900"></span>
+        </div>
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">سالن:</span>
+          <span id="receipt-salon" class="font-bold text-stone-800"></span>
+        </div>
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">خدمت و متخصص:</span>
+          <span id="receipt-service" class="font-bold text-stone-800"></span>
+        </div>
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">زمان نوبت:</span>
+          <span id="receipt-datetime" class="font-bold text-stone-800"></span>
+        </div>
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">رزروکننده:</span>
+          <span id="receipt-client" class="font-bold text-stone-800"></span>
+        </div>
+        <div class="flex justify-between border-b border-stone-200/80 pb-2">
+          <span class="text-stone-500">مبلغ نهایی:</span>
+          <span id="receipt-price" class="font-bold text-purple-900"></span>
+        </div>
+        <div>
+          <span class="text-stone-500 block mb-0.5">آدرس سالن:</span>
+          <span id="receipt-address" class="text-stone-700 text-[11px]"></span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="closeReceiptModal()"
+          class="flex-1 py-3 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold transition"
+        >
+          متوجه شدم
+        </button>
+        <button 
+          onclick="window.print()"
+          class="px-4 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-semibold transition"
+        >
+          چاپ رسید
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       مدال نوبت‌های من (My Appointments Drawer)
+       ======================================================================== -->
+  <div id="appointments-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-right animate-fade-in relative max-h-[90vh] flex flex-col justify-between overflow-y-auto">
+      
+      <button 
+        onclick="closeAppointmentsModal()" 
+        class="absolute top-5 left-5 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 transition cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <div>
+        <div class="mb-4">
+          <h3 class="text-lg font-bold text-stone-900">نوبت‌های رزرو شده من</h3>
+          <p class="text-xs text-stone-500">لیست نوبت‌های ثبت‌شده شما که در حافظه مرورگر (LocalStorage) نگهداری می‌شوند.</p>
+        </div>
+
+        <div id="appointments-list-container" class="space-y-3 max-h-[60vh] overflow-y-auto p-1">
+          <!-- توسط JS پر می‌شود -->
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-stone-200 flex justify-end">
+        <button 
+          onclick="closeAppointmentsModal()" 
+          class="px-5 py-2.5 bg-stone-900 text-white rounded-xl text-xs font-semibold"
+        >
+          بستن پنجره
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       مدال جدول مقایسه آرایشگاه‌ها (Comparison Matrix Modal)
+       ======================================================================== -->
+  <div id="comparison-modal" class="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 text-right animate-fade-in relative max-h-[90vh] overflow-y-auto">
+      
+      <button 
+        onclick="closeComparisonModal()" 
+        class="absolute top-5 left-5 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 transition cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <div class="mb-5">
+        <h3 class="text-xl font-bold text-stone-900">جدول مقایسه آرایشگاه‌های انتخابی</h3>
+        <p class="text-xs text-stone-500">مقایسه ویژگی‌ها، رده قیمتی و ساعات کاری در یک نگاه</p>
+      </div>
+
+      <div id="comparison-content" class="overflow-x-auto pb-4">
+        <!-- توسط JS پر می‌شود -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- لود اسکریپت اصلی جاوااسکریپت -->
+  <script src="./script.js"></script>
+
+</body>
+</html>
